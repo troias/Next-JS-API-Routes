@@ -1,10 +1,11 @@
-
+import Link from 'next/link'
+import { useRouter } from 'next/router';
 import { useRef, useState } from "react";
 
 function HomePage(props) {
   const { feedback } = props;
-
-  console.log("homepage props", props)
+  const router = useRouter()
+  // console.log("homepage props", props)
   const [showFB, setShowFB] = useState(false);
   const [loading, setLoading] = useState(false)
 
@@ -41,7 +42,7 @@ function HomePage(props) {
     )
   }
 
- 
+
   return (
     <div>
       <h1>The Home Page</h1>
@@ -55,6 +56,7 @@ function HomePage(props) {
           <textarea type="text" id="feedback" rows="5" ref={feedbackRef} />
         </div>
         <button>Send Feedback</button>
+
       </form>
       <button onClick={showFeedbackHandler}>Load Feedback</button>
       {showFB &&
@@ -62,9 +64,12 @@ function HomePage(props) {
           <ul key={feedback.id}>
             <li>{feedback.email}</li>
             <li>{feedback.feedback}</li>
+            <Link href={`/feedback/${feedback.id}`}>
+              <button>Show Details</button>
+            </Link>
           </ul>
         ))}
-     
+      <button onClick={() => router.push('/feedback')} >Feedback Page</button>
     </div>
   );
 }
