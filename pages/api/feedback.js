@@ -6,7 +6,7 @@ export const buildFeedBackPath = () => {
     return  path.join(process.cwd(), "data", "feedback.json");
 }
 
-const extractFeedBackData = () => {
+export const extractFeedBackData = () => {
     const filePath = buildFeedBackPath()
     const fileData = readFileData(filePath)
     return fileData
@@ -16,7 +16,7 @@ const readFileData = (filePath) => {
     return  fs.readFileSync(filePath)
 }
 
-const jsonToObject = (fileData) => {
+export const jsonToObject = (fileData) => {
     return JSON.parse(fileData);
 }
 
